@@ -1,0 +1,27 @@
+# 환경 변수 (API 키 등)
+.env
+gpt/.env
+
+# 런타임 캐시
+gpt/.parser_cache.json
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Streamlit
+.streamlit/secrets.toml
+gpt/.streamlit/secrets.toml
+
+# OS / IDE
+.DS_Store
+__MACOSX/
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# 가상 환경
+.venv/
+venv/
+env/
