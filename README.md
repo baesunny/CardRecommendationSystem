@@ -112,7 +112,7 @@ CardRecommendationSystem/
 
 ## 설치 및 실행
 
-### 1. 의존성 설치
+### 1. requirements 설치
 
 ```bash
 pip install -r requirements.txt
