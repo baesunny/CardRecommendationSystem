@@ -1,0 +1,819 @@
+{
+  "model": "jhgan/ko-sroberta-multitask",
+  "embedding_dim": 768,
+  "num_cards": 100,
+  "normalized": true,
+  "columns_in_processed_csv": [
+    "card_company",
+    "card_name",
+    "annual_fee",
+    "previous_month_requirement",
+    "main_categories",
+    "raw_benefits",
+    "annual_fee_raw",
+    "previous_month_requirement_raw",
+    "embedding_text"
+  ],
+  "cards": [
+    {
+      "idx": 0,
+      "card_company": "삼성카드",
+      "card_name": "삼성 iD SELECT ON 카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 300000,
+      "main_categories": "선택형 | 생활 | 디지털구독 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 1,
+      "card_company": "삼성카드",
+      "card_name": "삼성 iD SELECT ALL 카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 400000,
+      "main_categories": "선택형 | 생활 | 디지털구독 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 2,
+      "card_company": "삼성카드",
+      "card_name": "삼성 iD GLOBAL 카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 500000,
+      "main_categories": "해외 | 공항라운지 | 디지털구독 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 3,
+      "card_company": "삼성카드",
+      "card_name": "THE iD. 1st",
+      "annual_fee": 150000,
+      "previous_month_requirement": 500000,
+      "main_categories": "프리미엄 | 적립 | 공항라운지 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 4,
+      "card_company": "삼성카드",
+      "card_name": "삼성카드 taptap O",
+      "annual_fee": 10000,
+      "previous_month_requirement": 300000,
+      "main_categories": "카페 | 대중교통 | 영화 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 5,
+      "card_company": "삼성카드",
+      "card_name": "삼성 iD SIMPLE 카드",
+      "annual_fee": 7000,
+      "previous_month_requirement": 0,
+      "main_categories": "모든가맹점 | 온라인쇼핑 | 영화 | 쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 6,
+      "card_company": "삼성카드",
+      "card_name": "taptap DIGITAL",
+      "annual_fee": 10000,
+      "previous_month_requirement": 300000,
+      "main_categories": "간편결제 | 디지털구독 | 편의점 | 쇼핑 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 7,
+      "card_company": "삼성카드",
+      "card_name": "삼성카드 & MILEAGE PLATINUM (스카이패스)",
+      "annual_fee": 47000,
+      "previous_month_requirement": 0,
+      "main_categories": "대한항공 | 카페 | 공항라운지 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 8,
+      "card_company": "신한카드",
+      "card_name": "신한카드 Simple Plan+",
+      "annual_fee": 47000,
+      "previous_month_requirement": 0,
+      "main_categories": "할인 | 해외 | 캐시백 | 쇼핑 | 교통 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 9,
+      "card_company": "삼성카드",
+      "card_name": "THE 1 (스카이패스)",
+      "annual_fee": 245000,
+      "previous_month_requirement": 300000,
+      "main_categories": "프리미엄 서비스 | 대한항공 | 공항 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 10,
+      "card_company": "신한카드",
+      "card_name": "신한카드 Air One",
+      "annual_fee": 0,
+      "previous_month_requirement": 500000,
+      "main_categories": "대한항공 | 공항 | 해외이용 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 11,
+      "card_company": "삼성카드",
+      "card_name": "삼성 iD ON 카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 300000,
+      "main_categories": "할인 | 생활 | 모든가맹점 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 12,
+      "card_company": "신한카드",
+      "card_name": "신한카드 처음(ANNIVERSE)",
+      "annual_fee": 15000,
+      "previous_month_requirement": 300000,
+      "main_categories": "적립 | 통신 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 13,
+      "card_company": "신한카드",
+      "card_name": "신한카드 Discount Plan+",
+      "annual_fee": 50000,
+      "previous_month_requirement": 400000,
+      "main_categories": "카페/디저트 | 쇼핑 | 할인 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 14,
+      "card_company": "신한카드",
+      "card_name": "신한카드 Deep Oil",
+      "annual_fee": 0,
+      "previous_month_requirement": 300000,
+      "main_categories": "주유 | 자동차/하이패스 | 생활 | 식당/카페 | 교통 | 통신 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 15,
+      "card_company": "신한카드",
+      "card_name": "신한카드 Mr.Life",
+      "annual_fee": 0,
+      "previous_month_requirement": 300000,
+      "main_categories": "공과금 | 마트/편의점 | 푸드 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 포인트/캐시백"
+    },
+    {
+      "idx": 16,
+      "card_company": "신한카드",
+      "card_name": "신한카드 RPM+ Platinum#",
+      "annual_fee": 0,
+      "previous_month_requirement": 500000,
+      "main_categories": "주유소 | 충전소 | 모든가맹점 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 17,
+      "card_company": "현대카드",
+      "card_name": "대한항공카드 300",
+      "annual_fee": 300000,
+      "previous_month_requirement": 500000,
+      "main_categories": "항공마일리지 | 적립 | 항공권 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 18,
+      "card_company": "현대카드",
+      "card_name": "현대카드ZERO Edition3(할인형)",
+      "annual_fee": 15000,
+      "previous_month_requirement": 0,
+      "main_categories": "할인 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 19,
+      "card_company": "현대카드",
+      "card_name": "현대카드 M",
+      "annual_fee": 30000,
+      "previous_month_requirement": 500000,
+      "main_categories": "적립 | 해외 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 20,
+      "card_company": "신한카드",
+      "card_name": "메리어트 본보이™ 더 베스트 신한카드",
+      "annual_fee": 264000,
+      "previous_month_requirement": 0,
+      "main_categories": "호텔 | 멤버십포인트 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 21,
+      "card_company": "현대카드",
+      "card_name": "American Express® Gold Card Edition2",
+      "annual_fee": 0,
+      "previous_month_requirement": 500000,
+      "main_categories": "바우처 | 공항라운지 | 적립 | 쇼핑 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 22,
+      "card_company": "신한카드",
+      "card_name": "신한카드 Point Plan",
+      "annual_fee": 20000,
+      "previous_month_requirement": 0,
+      "main_categories": "적립 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 23,
+      "card_company": "신한카드",
+      "card_name": "신한카드 The BEST-F",
+      "annual_fee": 0,
+      "previous_month_requirement": 300000,
+      "main_categories": "할인 | 대한항공 | 바우처 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 24,
+      "card_company": "현대카드",
+      "card_name": "대한항공카드 060",
+      "annual_fee": 60000,
+      "previous_month_requirement": 500000,
+      "main_categories": "항공마일리지 | 적립 | 항공권 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 25,
+      "card_company": "현대카드",
+      "card_name": "대한항공카드 the First Edition2",
+      "annual_fee": 800000,
+      "previous_month_requirement": 500000,
+      "main_categories": "항공마일리지 | 적립 | 항공권 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 26,
+      "card_company": "현대카드",
+      "card_name": "the Orange",
+      "annual_fee": 200000,
+      "previous_month_requirement": 500000,
+      "main_categories": "국내외가맹점 | 적립 | 바우처 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 27,
+      "card_company": "현대카드",
+      "card_name": "현대카드 Summit",
+      "annual_fee": 200000,
+      "previous_month_requirement": 500000,
+      "main_categories": "국내외가맹점 | 적립 | 바우처 | 쇼핑 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 28,
+      "card_company": "현대카드",
+      "card_name": "현대카드T",
+      "annual_fee": 15000,
+      "previous_month_requirement": 0,
+      "main_categories": "할인 | 해외이용 | 수수료우대 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 29,
+      "card_company": "현대카드",
+      "card_name": "대한항공카드 120",
+      "annual_fee": 120000,
+      "previous_month_requirement": 500000,
+      "main_categories": "항공마일리지 | 적립 | 항공권 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 30,
+      "card_company": "KB국민카드",
+      "card_name": "쿠팡 와우카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 0,
+      "main_categories": "적립 | 고스티 | 쇼핑 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 31,
+      "card_company": "KB국민카드",
+      "card_name": "KB NEED Pay 카드",
+      "annual_fee": 19000,
+      "previous_month_requirement": 400000,
+      "main_categories": "간편결제 | 할인 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 32,
+      "card_company": "KB국민카드",
+      "card_name": "굿데이카드",
+      "annual_fee": 5000,
+      "previous_month_requirement": 300000,
+      "main_categories": "주유 | 통신 | 카페/디저트 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 포인트/캐시백"
+    },
+    {
+      "idx": 33,
+      "card_company": "KB국민카드",
+      "card_name": "KB국민 My WE:SH 카드",
+      "annual_fee": 15000,
+      "previous_month_requirement": 400000,
+      "main_categories": "간편결제 | 푸드 | 선택형 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 34,
+      "card_company": "KB국민카드",
+      "card_name": "KB YOU Prime 카드",
+      "annual_fee": 30000,
+      "previous_month_requirement": 400000,
+      "main_categories": "선택형 | 수수료우대 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 35,
+      "card_company": "KB국민카드",
+      "card_name": "가온올림카드(실속형)",
+      "annual_fee": 15000,
+      "previous_month_requirement": 300000,
+      "main_categories": "모든가맹점 | 적립 | 생활 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 36,
+      "card_company": "KB국민카드",
+      "card_name": "WE:SH Travel",
+      "annual_fee": 25000,
+      "previous_month_requirement": 300000,
+      "main_categories": "수수료우대 | 해외이용 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 37,
+      "card_company": "KB국민카드",
+      "card_name": "굿데이올림카드",
+      "annual_fee": 15000,
+      "previous_month_requirement": 300000,
+      "main_categories": "주유 | 통신 | 마트/편의점 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 포인트/캐시백"
+    },
+    {
+      "idx": 38,
+      "card_company": "KB국민카드",
+      "card_name": "다담카드",
+      "annual_fee": 0,
+      "previous_month_requirement": 300000,
+      "main_categories": "대중교통 | 주유 | 선택형 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 39,
+      "card_company": "롯데카드",
+      "card_name": "디지로카 Las Vegas",
+      "annual_fee": 20000,
+      "previous_month_requirement": 0,
+      "main_categories": "할인 | 무이자할부 | 쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 40,
+      "card_company": "롯데카드",
+      "card_name": "디지로카 London",
+      "annual_fee": 20000,
+      "previous_month_requirement": 0,
+      "main_categories": "모든가맹점 | 캐시백 | 무이자할부 | 쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 41,
+      "card_company": "KB국민카드",
+      "card_name": "BeV V카드(스카이패스형)",
+      "annual_fee": 0,
+      "previous_month_requirement": 500000,
+      "main_categories": "바우처 | 항공마일리지 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 42,
+      "card_company": "롯데카드",
+      "card_name": "LOCA 365 카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 500000,
+      "main_categories": "공과금/렌탈 | 생활 | 디지털구독 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 43,
+      "card_company": "롯데카드",
+      "card_name": "LOCA LIKIT 1.2",
+      "annual_fee": 10000,
+      "previous_month_requirement": 0,
+      "main_categories": "국내외가맹점 | 온라인쇼핑 | 쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 44,
+      "card_company": "롯데카드",
+      "card_name": "LOCA LIKIT Eat",
+      "annual_fee": 10000,
+      "previous_month_requirement": 400000,
+      "main_categories": "일반음식점 | 배달앱 | 카페 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 45,
+      "card_company": "우리카드",
+      "card_name": "카드의정석2",
+      "annual_fee": 22000,
+      "previous_month_requirement": 500000,
+      "main_categories": "모든가맹점 | 할인 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 46,
+      "card_company": "롯데카드",
+      "card_name": "LOCA LIKIT 1.5",
+      "annual_fee": 10000,
+      "previous_month_requirement": 0,
+      "main_categories": "국내가맹점 | 해외 | 쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 47,
+      "card_company": "롯데카드",
+      "card_name": "디지로카 Paris",
+      "annual_fee": 20000,
+      "previous_month_requirement": 500000,
+      "main_categories": "모든가맹점 | 쇼핑 | 온라인쇼핑 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 48,
+      "card_company": "롯데카드",
+      "card_name": "힐튼 아너스 아멕스 프리미엄",
+      "annual_fee": 497000,
+      "previous_month_requirement": 0,
+      "main_categories": "적립 | 호텔 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 49,
+      "card_company": "우리카드",
+      "card_name": "카드의정석 SHOPPING+",
+      "annual_fee": 10000,
+      "previous_month_requirement": 300000,
+      "main_categories": "온라인쇼핑 | 쇼핑 | 식당/카페 | 주유 | 포인트/캐시백"
+    },
+    {
+      "idx": 50,
+      "card_company": "롯데카드",
+      "card_name": "LOCA LIKIT Play",
+      "annual_fee": 10000,
+      "previous_month_requirement": 400000,
+      "main_categories": "주유소 | 영화 | 디지털구독 | 쇼핑 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 51,
+      "card_company": "롯데카드",
+      "card_name": "롯데 국민행복카드",
+      "annual_fee": 0,
+      "previous_month_requirement": 300000,
+      "main_categories": "국민행복 | 생활 | 교육/육아 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 52,
+      "card_company": "우리카드",
+      "card_name": "우리카드 MILE&POINT",
+      "annual_fee": 75000,
+      "previous_month_requirement": 500000,
+      "main_categories": "대한항공 | 기타 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 53,
+      "card_company": "우리카드",
+      "card_name": "카드의정석2 SUPER",
+      "annual_fee": 30000,
+      "previous_month_requirement": 0,
+      "main_categories": "국내외가맹점 | 무이자할부 | 수수료우대 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 54,
+      "card_company": "우리카드",
+      "card_name": "카드의정석 EVERY DISCOUNT",
+      "annual_fee": 12000,
+      "previous_month_requirement": 0,
+      "main_categories": "모든가맹점 | 간편결제 | 쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 55,
+      "card_company": "우리카드",
+      "card_name": "우리카드 7CORE",
+      "annual_fee": 0,
+      "previous_month_requirement": 500000,
+      "main_categories": "마트/편의점 | 푸드 | 할인 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 56,
+      "card_company": "우리카드",
+      "card_name": "DA카드의정석Ⅱ",
+      "annual_fee": 12000,
+      "previous_month_requirement": 300000,
+      "main_categories": "모든가맹점 | 할인 | 공항라운지 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 포인트/캐시백"
+    },
+    {
+      "idx": 57,
+      "card_company": "우리카드",
+      "card_name": "카드의정석 EVERY MILE SKYPASS",
+      "annual_fee": 39000,
+      "previous_month_requirement": 0,
+      "main_categories": "대한항공 | 수수료우대 | 공항라운지 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 58,
+      "card_company": "우리카드",
+      "card_name": "카드의정석 TEN",
+      "annual_fee": 12000,
+      "previous_month_requirement": 400000,
+      "main_categories": "카페 | 편의점 | 푸드 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 59,
+      "card_company": "우리카드",
+      "card_name": "the OPUS silver",
+      "annual_fee": 150000,
+      "previous_month_requirement": 500000,
+      "main_categories": "바우처 | 적립 | 할인 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 60,
+      "card_company": "하나카드",
+      "card_name": "트래블로그+(플러스) 신용카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 0,
+      "main_categories": "국내외가맹점 | 해외 | 여행/숙박 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 61,
+      "card_company": "하나카드",
+      "card_name": "토스뱅크 하나카드 Day",
+      "annual_fee": 20000,
+      "previous_month_requirement": 500000,
+      "main_categories": "할인 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 62,
+      "card_company": "하나카드",
+      "card_name": "하나 스카이패스 아멕스 플래티늄 카드",
+      "annual_fee": 0,
+      "previous_month_requirement": 500000,
+      "main_categories": "항공마일리지 | 공항라운지/PP | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 63,
+      "card_company": "하나카드",
+      "card_name": "원더카드 2.0 FREE+",
+      "annual_fee": 19900,
+      "previous_month_requirement": 400000,
+      "main_categories": "국내외가맹점 | 간편결제 | 할인 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 64,
+      "card_company": "하나카드",
+      "card_name": "원더카드 FREE",
+      "annual_fee": 12000,
+      "previous_month_requirement": 0,
+      "main_categories": "국내외가맹점 | 간편결제 | 생활 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 65,
+      "card_company": "하나카드",
+      "card_name": "JADE Classic",
+      "annual_fee": 115000,
+      "previous_month_requirement": 500000,
+      "main_categories": "바우처 | 공항라운지 | 적립 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 66,
+      "card_company": "하나카드",
+      "card_name": "CLUB1카드 200",
+      "annual_fee": 0,
+      "previous_month_requirement": 0,
+      "main_categories": "항공마일리지 | 면세점 | 선택형 | 쇼핑 | 교통 | 통신 | 여행/항공 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 67,
+      "card_company": "하나카드",
+      "card_name": "트래블로그 신용카드",
+      "annual_fee": 20000,
+      "previous_month_requirement": 0,
+      "main_categories": "국내외가맹점 | 해외이용 | 여행/숙박 | 쇼핑 | 온라인쇼핑 | 교통 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 68,
+      "card_company": "하나카드",
+      "card_name": "CLUB SK 카드",
+      "annual_fee": 6000,
+      "previous_month_requirement": 400000,
+      "main_categories": "SKT | 주유소 | 할인 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 69,
+      "card_company": "NH농협카드",
+      "card_name": "클래시 트래블카드",
+      "annual_fee": 120000,
+      "previous_month_requirement": 1000000,
+      "main_categories": "적립 | 공항라운지/PP | 쇼핑 | 통신 | 여행/항공 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 70,
+      "card_company": "NH농협카드",
+      "card_name": "zgm.the pay카드",
+      "annual_fee": 12000,
+      "previous_month_requirement": 0,
+      "main_categories": "모든가맹점 | 해외 | 간편결제 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 71,
+      "card_company": "하나카드",
+      "card_name": "원더카드 2.0 LIFE",
+      "annual_fee": 19900,
+      "previous_month_requirement": 400000,
+      "main_categories": "디지털구독 | 공과금/렌탈 | 할인 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 72,
+      "card_company": "NH농협카드",
+      "card_name": "올바른 FLEX 카드",
+      "annual_fee": 10000,
+      "previous_month_requirement": 300000,
+      "main_categories": "카페 | 디지털구독 | 영화 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 73,
+      "card_company": "NH농협카드",
+      "card_name": "zgm.play카드",
+      "annual_fee": 12000,
+      "previous_month_requirement": 300000,
+      "main_categories": "OTT/영화/문화 | 카페 | 패스트푸드 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 74,
+      "card_company": "NH농협카드",
+      "card_name": "zgm.streaming카드",
+      "annual_fee": 12000,
+      "previous_month_requirement": 400000,
+      "main_categories": "디지털구독 | 카페 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 75,
+      "card_company": "NH농협카드",
+      "card_name": "zgm.일본여행중 카드",
+      "annual_fee": 23000,
+      "previous_month_requirement": 300000,
+      "main_categories": "해외 | 공항라운지/PP | 쇼핑 | 온라인쇼핑 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 76,
+      "card_company": "NH농협카드",
+      "card_name": "zgm 할인카드",
+      "annual_fee": 27000,
+      "previous_month_requirement": 400000,
+      "main_categories": "할인 | 공과금/렌탈 | 디지털구독 | 쇼핑 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 77,
+      "card_company": "IBK기업은행",
+      "card_name": "I-Mileage (대한항공)",
+      "annual_fee": 41000,
+      "previous_month_requirement": 500000,
+      "main_categories": "대한항공 | 공항라운지/PP | 카페 | 쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 78,
+      "card_company": "IBK기업은행",
+      "card_name": "IBK포인트(신용)",
+      "annual_fee": 21000,
+      "previous_month_requirement": 500000,
+      "main_categories": "적립 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 79,
+      "card_company": "NH농협카드",
+      "card_name": "올바른 NEW HAVE카드",
+      "annual_fee": 12000,
+      "previous_month_requirement": 0,
+      "main_categories": "모든가맹점 | 적립 | 공항라운지 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 80,
+      "card_company": "NH농협카드",
+      "card_name": "NH20해봄카드",
+      "annual_fee": 0,
+      "previous_month_requirement": 300000,
+      "main_categories": "공항라운지 | 테마파크 | 온라인쇼핑 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 81,
+      "card_company": "NH농협카드",
+      "card_name": "NH올원 파이카드",
+      "annual_fee": 10000,
+      "previous_month_requirement": 300000,
+      "main_categories": "온라인쇼핑 | 선택형 | 생활 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 82,
+      "card_company": "IBK기업은행",
+      "card_name": "K-패스 (신용)",
+      "annual_fee": 2000,
+      "previous_month_requirement": 200000,
+      "main_categories": "대중교통 | 주유소 | 통신 | 쇼핑 | 식당/카페 | 교통 | 주유 | 여행/항공 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 83,
+      "card_company": "IBK기업은행",
+      "card_name": "BLISS Mileage",
+      "annual_fee": 99000,
+      "previous_month_requirement": 500000,
+      "main_categories": "대한항공 | 바우처 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 84,
+      "card_company": "IBK기업은행",
+      "card_name": "I-ALL",
+      "annual_fee": 14000,
+      "previous_month_requirement": 0,
+      "main_categories": "모든가맹점 | 쇼핑 | 디지털구독 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 85,
+      "card_company": "IBK기업은행",
+      "card_name": "IBK포인트3.8(신용)",
+      "annual_fee": 37000,
+      "previous_month_requirement": 500000,
+      "main_categories": "적립 | 해외 | 온라인쇼핑 | 쇼핑 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 86,
+      "card_company": "IBK기업은행",
+      "card_name": "BLISS Point",
+      "annual_fee": 99000,
+      "previous_month_requirement": 500000,
+      "main_categories": "국내외가맹점 | 적립 | 바우처 | 쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 87,
+      "card_company": "IBK기업은행",
+      "card_name": "Daily With(데일리위드)카드",
+      "annual_fee": 10000,
+      "previous_month_requirement": 500000,
+      "main_categories": "할인 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 88,
+      "card_company": "IBK기업은행",
+      "card_name": "코웨이 IBK카드",
+      "annual_fee": 12000,
+      "previous_month_requirement": 300000,
+      "main_categories": "렌탈 | 교통 | 통신 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 89,
+      "card_company": "IBK기업은행",
+      "card_name": "IBK-Hybrid(하이브리드)카드",
+      "annual_fee": 0,
+      "previous_month_requirement": 0,
+      "main_categories": "무실적 | 모든가맹점 | 기타 | 쇼핑 | 교통 | 여행/항공 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 90,
+      "card_company": "BC 바로카드",
+      "card_name": "BC 바로 클리어 플러스",
+      "annual_fee": 5000,
+      "previous_month_requirement": 150000,
+      "main_categories": "푸드 | 온라인쇼핑 | 통신 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 91,
+      "card_company": "BC 바로카드",
+      "card_name": "BC 바로 On&Off 카드",
+      "annual_fee": 5000,
+      "previous_month_requirement": 300000,
+      "main_categories": "간편결제 | 교통 | 해외 | 식당/카페 | 통신 | 여행/항공 | 포인트/캐시백"
+    },
+    {
+      "idx": 92,
+      "card_company": "BC 바로카드",
+      "card_name": "BC 바로 ZONE 카드",
+      "annual_fee": 19000,
+      "previous_month_requirement": 300000,
+      "main_categories": "할인 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 93,
+      "card_company": "BC 바로카드",
+      "card_name": "BC 바로 Air Max 카드",
+      "annual_fee": 43000,
+      "previous_month_requirement": 500000,
+      "main_categories": "대한항공 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 94,
+      "card_company": "BC 바로카드",
+      "card_name": "BC 바로 MACAO 카드",
+      "annual_fee": 12000,
+      "previous_month_requirement": 300000,
+      "main_categories": "주유 | 마트/편의점 | 해외 | 쇼핑 | 온라인쇼핑 | 식당/카페 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 95,
+      "card_company": "BC 바로카드",
+      "card_name": "kt DC PLUS",
+      "annual_fee": 12000,
+      "previous_month_requirement": 300000,
+      "main_categories": "KT | 주유 | 교통 | 통신 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 96,
+      "card_company": "BC 바로카드",
+      "card_name": "K-패스 카드",
+      "annual_fee": 6000,
+      "previous_month_requirement": 300000,
+      "main_categories": "대중교통 | 디지털구독 | 통신 | 쇼핑 | 식당/카페 | 교통 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 97,
+      "card_company": "BC 바로카드",
+      "card_name": "BC 바로 Air Master 카드",
+      "annual_fee": 29000,
+      "previous_month_requirement": 500000,
+      "main_categories": "대한항공 | 교통 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 98,
+      "card_company": "BC 바로카드",
+      "card_name": "신세계 BC 바로 콰트로 플러스",
+      "annual_fee": 5000,
+      "previous_month_requirement": 300000,
+      "main_categories": "쇼핑 | 교통 | 온라인쇼핑 | 식당/카페 | 통신 | 주유 | 여행/항공 | 의료/병원 | 보험 | 포인트/캐시백"
+    },
+    {
+      "idx": 99,
+      "card_company": "BC 바로카드",
+      "card_name": "신세계 BC 바로 SEVEN FLEX",
+      "annual_fee": 20000,
+      "previous_month_requirement": 300000,
+      "main_categories": "쇼핑 | 간편결제 | 카페/디저트 | 식당/카페 | 교통 | 통신 | 여행/항공 | 구독/스트리밍 | 의료/병원 | 보험 | 포인트/캐시백"
+    }
+  ]
+}
