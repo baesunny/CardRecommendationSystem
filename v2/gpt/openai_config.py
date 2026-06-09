@@ -9,6 +9,7 @@ from pathlib import Path
 import httpx
 from openai import APIConnectionError, AuthenticationError, OpenAI, RateLimitError
 
+_REPO_ROOT = Path(__file__).parent.parent.parent
 _PROJECT_ROOT = Path(__file__).parent.parent
 _GPT_DIR = Path(__file__).parent
 
@@ -40,6 +41,7 @@ def _load_dotenv() -> None:
         from dotenv import load_dotenv
     except ImportError:
         return
+    load_dotenv(_REPO_ROOT / ".env", override=True)
     load_dotenv(_PROJECT_ROOT / ".env", override=True)
     load_dotenv(_GPT_DIR / ".env", override=True)
 
@@ -79,7 +81,7 @@ def require_api_key() -> str:
     if not key:
         raise ValueError(
             "OpenAI API 키가 설정되지 않았다.\n"
-            "프로젝트 루트의 .env 파일에 OPENAI_API_KEY=sk-... 를 설정해야 한다."
+            "저장소 루트 또는 v2/.env 파일에 OPENAI_API_KEY=your-api-key-here 를 설정해야 한다."
         )
     return key
 

@@ -1,9 +1,11 @@
 # 환경 변수 (API 키 등)
 .env
-gpt/.env
+v2/.env
+v2/gpt/.env
+v3/.env
 
 # 런타임 캐시
-gpt/.parser_cache.json
+v2/gpt/.parser_cache.json
 __pycache__/
 *.py[cod]
 *$py.class
@@ -11,7 +13,8 @@ __pycache__/
 
 # Streamlit
 .streamlit/secrets.toml
-gpt/.streamlit/secrets.toml
+v2/.streamlit/secrets.toml
+v2/gpt/.streamlit/secrets.toml
 
 # OS / IDE
 .DS_Store
@@ -25,3 +28,9 @@ Thumbs.db
 .venv/
 venv/
 env/
+
+# 개인 거래내역·민감 데이터 (커밋 금지)
+*.xlsx
+**/example_dataset_mk.csv
+**/debug_output/*.json
+!**/debug_output/.gitkeep

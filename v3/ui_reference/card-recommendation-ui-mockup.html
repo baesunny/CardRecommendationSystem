@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 맞춤 신용카드 추천 — UI 개선 참고 목업</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: rgba(255,255,255,0.08);
+      --text: #f0f0f0;
+      --muted: #8a8a8a;
+      --gold: #d4a853;
+      --gold-light: #f0d78c;
+      --gold-glow: rgba(212,168,83,0.25);
+      --green: #7ec86e;
+      --green-bg: rgba(126,200,110,0.12);
+      --radius: 14px;
+      --sidebar-w: 260px;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1.25rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar h2 { font-size: 0.95rem; margin-bottom: 1rem; color: var(--gold-light); }
+    .sidebar ul { list-style: none; font-size: 0.8rem; color: var(--muted); }
+    .sidebar li { margin-bottom: 0.55rem; padding-left: 0.75rem; border-left: 2px solid var(--border); }
+    .sidebar li b { color: var(--text); font-weight: 600; }
+    .sidebar .note { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--muted); }
+    .sidebar .note code { background: var(--surface-2); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.68rem; }
+
+    /* ── Main ── */
+    .main { flex: 1; padding: 1.25rem 1.75rem 2.5rem; max-width: 1100px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #141210 0%, #1a1610 50%, #0d0d0d 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40%; right: -8%;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, var(--gold-glow), transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 1.55rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+    .hero p { font-size: 0.88rem; color: var(--muted); margin-top: 0.3rem; }
+    .badge {
+      display: inline-block; margin-top: 0.65rem;
+      padding: 0.22rem 0.65rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 600;
+      background: rgba(212,168,83,0.15);
+      border: 1px solid rgba(212,168,83,0.35);
+      color: var(--gold-light);
+    }
+
+    /* ── KPI ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.7rem;
+      margin-bottom: 1.1rem;
+    }
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.8rem 0.95rem;
+    }
+    .kpi.highlight {
+      background: linear-gradient(135deg, rgba(212,168,83,0.12), rgba(212,168,83,0.04));
+      border-color: rgba(212,168,83,0.3);
+    }
+    .kpi .label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi .value { font-size: 1.25rem; font-weight: 700; margin-top: 0.1rem; }
+    .kpi.highlight .value { color: var(--gold-light); }
+    .kpi .sub { font-size: 0.68rem; color: var(--green); margin-top: 0.15rem; }
+
+    /* ── Tabs ── */
+    .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 1.25rem; }
+    .tab {
+      padding: 0.65rem 1.1rem;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--muted);
+      background: none; border: none; cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--text); border-bottom-color: #e74c3c; }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Grid layouts ── */
+    .grid-3-2 { display: grid; grid-template-columns: 3fr 2fr; gap: 1rem; }
+    .grid-3-2-card { display: grid; grid-template-columns: 3fr 2fr; gap: 1.25rem; }
+
+    .panel-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+    }
+    .panel-box h4 { font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-bottom: 0.85rem; }
+
+    /* ── Horizontal bars ── */
+    .hbar { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.4rem; font-size: 0.76rem; }
+    .hbar .name { width: 68px; text-align: right; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+    .hbar .track { flex: 1; height: 16px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+    .hbar .fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, rgba(212,168,83,0.45), var(--gold)); }
+    .hbar .val { width: 72px; text-align: right; color: var(--muted); font-size: 0.7rem; flex-shrink: 0; }
+
+    /* ── Category chips ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .chip {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.4rem 0.7rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.74rem;
+    }
+    .chip .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .chip .pct { font-weight: 700; color: var(--gold-light); }
+
+    /* ── Section title ── */
+    .sec-title {
+      display: flex; align-items: center; gap: 0.45rem;
+      font-size: 0.88rem; font-weight: 600;
+      margin: 1.25rem 0 0.75rem;
+    }
+    .sec-title .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+
+    /* ── Line chart (SVG) ── */
+    .chart-wrap { margin-top: 0.5rem; }
+    .chart-wrap svg { width: 100%; height: auto; }
+    .chart-label { font-size: 0.65rem; fill: var(--muted); }
+    .chart-line { fill: none; stroke: var(--gold); stroke-width: 2; }
+    .chart-area { fill: url(#goldGrad); opacity: 0.3; }
+    .chart-dot { fill: var(--gold); }
+
+    /* ── Credit card ── */
+    .credit-card {
+      background: linear-gradient(135deg, #1e1a14 0%, #2a2318 40%, #1a1610 100%);
+      border: 1px solid rgba(212,168,83,0.35);
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .credit-card::after {
+      content: '';
+      position: absolute; top: -50%; right: -20%;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(212,168,83,0.15), transparent 70%);
+    }
+    .cc-rank { font-size: 0.7rem; font-weight: 600; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+    .cc-name { font-size: 1.35rem; font-weight: 700; color: #fff; margin: 0.25rem 0 0.1rem; }
+    .cc-company { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.1rem; }
+    .cc-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
+    .cc-metric {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+    }
+    .cc-metric .ml { font-size: 0.65rem; color: var(--muted); }
+    .cc-metric .mv { font-size: 0.95rem; font-weight: 700; color: var(--gold-light); margin-top: 0.08rem; }
+    .cc-metric.hero .mv { font-size: 1.1rem; color: var(--green); }
+    .cc-summary {
+      margin-top: 0.9rem; padding: 0.7rem 0.9rem;
+      background: rgba(0,0,0,0.25); border-radius: 10px;
+      font-size: 0.82rem; line-height: 1.6; color: #ccc;
+    }
+
+    /* ── Benefit bars ── */
+    .benefit { margin-bottom: 0.55rem; }
+    .benefit-hd { display: flex; justify-content: space-between; font-size: 0.76rem; margin-bottom: 0.2rem; }
+    .benefit-hd .amt { color: var(--green); font-weight: 600; }
+    .benefit-track { height: 5px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+    .benefit-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #5a9e4e, var(--green)); }
+
+    /* ── Card list ── */
+    .card-item {
+      display: flex; align-items: center; gap: 0.85rem;
+      padding: 0.8rem 0.95rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.45rem;
+    }
+    .card-item:hover { border-color: rgba(212,168,83,0.3); }
+    .card-item .rank { font-size: 1.2rem; width: 32px; text-align: center; flex-shrink: 0; }
+    .card-item .info { flex: 1; min-width: 0; }
+    .card-item .title { font-size: 0.84rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-item .fee { font-size: 0.68rem; color: var(--muted); margin-top: 0.08rem; }
+    .card-item .saving { text-align: right; flex-shrink: 0; }
+    .card-item .saving .val { font-size: 0.95rem; font-weight: 700; color: var(--green); }
+    .card-item .saving .lbl { font-size: 0.65rem; color: var(--muted); }
+
+    /* ── Compare bars ── */
+    .compare { display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.5rem; font-size: 0.76rem; }
+    .compare .label { width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+    .compare .track { flex: 1; height: 20px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
+    .compare .fill { height: 100%; border-radius: 5px; }
+    .compare .val { width: 76px; text-align: right; color: var(--gold-light); font-weight: 600; font-size: 0.72rem; flex-shrink: 0; }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th, td { padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 500; font-size: 0.72rem; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr:hover td { background: var(--surface-2); }
+
+    /* ── Accordion ── */
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.4rem;
+      font-size: 0.8rem;
+    }
+    details summary {
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+      list-style: none;
+    }
+    details summary::before { content: '▸ '; color: var(--muted); }
+    details[open] summary::before { content: '▾ '; }
+    details .body { padding: 0 0.9rem 0.75rem; color: var(--muted); line-height: 1.65; }
+    details .body strong { color: var(--text); }
+
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-3-2, .grid-3-2-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>🎨 UI 개선 포인트</h2>
+    <ul>
+      <li><b>정보 밀도</b> — KPI 4칸 컴팩트, 탭으로 섹션 분리</li>
+      <li><b>차트</b> — 78개 세로 막대 → Top 10 가로 막대</li>
+      <li><b>카테고리</b> — 소비 비중 칩으로 한눈에 파악</li>
+      <li><b>1위 카드</b> — 실물 카드 느낌 프리미엄 비주얼</li>
+      <li><b>2~5위</b> — 컴팩트 리스트 + 비교 막대</li>
+      <li><b>혜택</b> — 프로그레스 바로 절감 비중 표시</li>
+      <li><b>추이</b> — 월별 할인 라인 차트 추가</li>
+    </ul>
+    <div class="note">
+      이 파일은 <b>참고용 정적 목업</b>입니다.<br/>
+      브라우저에서 바로 열어 레이아웃·색상·컴포넌트를 확인하세요.
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <header class="hero">
+      <h1>💳 AI 맞춤 신용카드 추천</h1>
+      <p>12개월 소비 데이터 기반 최적 카드 시뮬레이션 · UI 개선 참고 목업</p>
+      <span class="badge">✨ UI DEMO v2 — 레이아웃·차트·카드 비주얼 개선안</span>
+    </header>
+
+    <!-- KPI -->
+    <div class="kpi-grid">
+      <div class="kpi highlight">
+        <div class="label">1위 순 절감액</div>
+        <div class="value">709,795원</div>
+        <div class="sub">월 평균 68,732원</div>
+      </div>
+      <div class="kpi">
+        <div class="label">매칭 거래</div>
+        <div class="value">708건</div>
+        <div class="sub">78개 가맹점</div>
+      </div>
+      <div class="kpi">
+        <div class="label">연간 대상 소비</div>
+        <div class="value">13,232,798원</div>
+        <div class="sub">혜택 적용 가능</div>
+      </div>
+      <div class="kpi">
+        <div class="label">추천 카드 수</div>
+        <div class="value">Top 5</div>
+        <div class="sub">시뮬레이션 완료</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="spend">📊 소비 분석</button>
+      <button class="tab" data-tab="cards">🏆 카드 추천</button>
+      <button class="tab" data-tab="detail">📋 상세 비교</button>
+    </nav>
+
+    <!-- Panel: 소비 분석 -->
+    <section class="panel active" id="spend">
+      <div class="grid-3-2">
+        <div class="panel-box">
+          <h4>Top 10 가맹점 연간 지출</h4>
+          <div class="hbar"><span class="name">무신사</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">742,120원</span></div>
+          <div class="hbar"><span class="name">배달의민족</span><div class="track"><div class="fill" style="width:74%"></div></div><span class="val">550,600원</span></div>
+          <div class="hbar"><span class="name">쏘카</span><div class="track"><div class="fill" style="width:56%"></div></div><span class="val">417,700원</span></div>
+          <div class="hbar"><span class="name">아고다</span><div class="track"><div class="fill" style="width:53%"></div></div><span class="val">390,000원</span></div>
+          <div class="hbar"><span class="name">이마트</span><div class="track"><div class="fill" style="width:48%"></div></div><span class="val">355,200원</span></div>
+          <div class="hbar"><span class="name">GS25</span><div class="track"><div class="fill" style="width:42%"></div></div><span class="val">312,400원</span></div>
+          <div class="hbar"><span class="name">스타벅스</span><div class="track"><div class="fill" style="width:35%"></div></div><span class="val">258,900원</span></div>
+          <div class="hbar"><span class="name">넷플릭스</span><div class="track"><div class="fill" style="width:28%"></div></div><span class="val">210,000원</span></div>
+          <div class="hbar"><span class="name">카카오T</span><div class="track"><div class="fill" style="width:24%"></div></div><span class="val">178,500원</span></div>
+          <div class="hbar"><span class="name">CU</span><div class="track"><div class="fill" style="width:20%"></div></div><span class="val">148,300원</span></div>
+        </div>
+        <div class="panel-box">
+          <h4>카테고리별 소비 비중</h4>
+          <div class="chips">
+            <div class="chip"><span class="dot" style="background:#d4a853"></span>쇼핑 <span class="pct">28%</span> <span style="color:var(--muted);font-size:0.68rem">3,705,240원</span></div>
+            <div class="chip"><span class="dot" style="background:#7ec86e"></span>배달 <span class="pct">18%</span> <span style="color:var(--muted);font-size:0.68rem">2,381,900원</span></div>
+            <div class="chip"><span class="dot" style="background:#8a9bae"></span>교통 <span class="pct">14%</span> <span style="color:var(--muted);font-size:0.68rem">1,852,600원</span></div>
+            <div class="chip"><span class="dot" style="background:#6ba3d6"></span>마트 <span class="pct">12%</span> <span style="color:var(--muted);font-size:0.68rem">1,587,936원</span></div>
+            <div class="chip"><span class="dot" style="background:#b07cc6"></span>편의점 <span class="pct">10%</span> <span style="color:var(--muted);font-size:0.68rem">1,323,280원</span></div>
+            <div class="chip"><span class="dot" style="background:#5bc4b0"></span>구독 <span class="pct">8%</span> <span style="color:var(--muted);font-size:0.68rem">1,058,624원</span></div>
+            <div class="chip"><span class="dot" style="background:#c97b5a"></span>카페 <span class="pct">6%</span> <span style="color:var(--muted);font-size:0.68rem">793,968원</span></div>
+            <div class="chip"><span class="dot" style="background:#666"></span>기타 <span class="pct">4%</span> <span style="color:var(--muted);font-size:0.68rem">529,250원</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-title"><span class="dot"></span>월별 할인 추이 (1위 카드)</div>
+      <div class="panel-box chart-wrap">
+        <svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4a853" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#d4a853" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Y labels -->
+          <text class="chart-label" x="8" y="20">100,000</text>
+          <text class="chart-label" x="8" y="70">70,000</text>
+          <text class="chart-label" x="8" y="120">40,000</text>
+          <text class="chart-label" x="8" y="165">0</text>
+          <!-- Grid -->
+          <line x1="60" y1="15" x2="680" y2="15" stroke="rgba(255,255,255,0.06)" />
+          <line x1="60" y1="65" x2="680" y2="65" stroke="rgba(255,255,255,0.06)" />
+          <line x1="60" y1="115" x2="680" y2="115" stroke="rgba(255,255,255,0.06)" />
+          <line x1="60" y1="160" x2="680" y2="160" stroke="rgba(255,255,255,0.06)" />
+          <!-- Area + Line (monthly discount data) -->
+          <path class="chart-area" d="M 60,115 L 112,88 L 164,72 L 216,82 L 268,128 L 320,130 L 372,58 L 424,95 L 476,160 L 528,160 L 580,135 L 632,160 L 680,145 L 680,160 L 60,160 Z"/>
+          <polyline class="chart-line" points="60,115 112,88 164,72 216,82 268,128 320,130 372,58 424,95 476,160 528,160 580,135 632,160 680,145"/>
+          <circle class="chart-dot" cx="372" cy="58" r="4"/>
+          <!-- X labels -->
+          <text class="chart-label" x="55" y="175">6월</text>
+          <text class="chart-label" x="155" y="175">8월</text>
+          <text class="chart-label" x="255" y="175">10월</text>
+          <text class="chart-label" x="355" y="175">12월</text>
+          <text class="chart-label" x="455" y="175">2월</text>
+          <text class="chart-label" x="555" y="175">4월</text>
+          <text class="chart-label" x="655" y="175">6월</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Panel: 카드 추천 -->
+    <section class="panel" id="cards">
+      <div class="grid-3-2-card">
+        <div>
+          <div class="sec-title"><span class="dot"></span>1위 추천 카드</div>
+          <div class="credit-card">
+            <div class="cc-rank">🥇 Best Recommendation</div>
+            <div class="cc-name">JADE Classic</div>
+            <div class="cc-company">하나카드</div>
+            <div class="cc-metrics">
+              <div class="cc-metric"><div class="ml">연회비</div><div class="mv">115,000원</div></div>
+              <div class="cc-metric"><div class="ml">연간 총 할인</div><div class="mv">824,795원</div></div>
+              <div class="cc-metric hero"><div class="ml">순 절감액</div><div class="mv">709,795원/년</div></div>
+            </div>
+            <div class="cc-summary">JADE Classic 카드는 다양한 가맹점에서의 적립과 할인 혜택을 통해 연간 <b style="color:var(--green)">709,795원</b>의 순절감액을 제공합니다.</div>
+          </div>
+
+          <div style="margin-top:1rem">
+            <div class="benefit"><div class="benefit-hd"><span>배달앱</span><span class="amt">550,600원</span></div><div class="benefit-track"><div class="benefit-fill" style="width:100%"></div></div></div>
+            <div class="benefit"><div class="benefit-hd"><span>적립</span><span class="amt">122,063원</span></div><div class="benefit-track"><div class="benefit-fill" style="width:22%"></div></div></div>
+            <div class="benefit"><div class="benefit-hd"><span>디지털구독</span><span class="amt">73,950원</span></div><div class="benefit-track"><div class="benefit-fill" style="width:13%"></div></div></div>
+            <div class="benefit"><div class="benefit-hd"><span>적립 (영역별)</span><span class="amt">39,132원</span></div><div class="benefit-track"><div class="benefit-fill" style="width:7%"></div></div></div>
+            <div class="benefit"><div class="benefit-hd"><span>택시</span><span class="amt">20,000원</span></div><div class="benefit-track"><div class="benefit-fill" style="width:4%"></div></div></div>
+            <div class="benefit"><div class="benefit-hd"><span>카페</span><span class="amt">19,050원</span></div><div class="benefit-track"><div class="benefit-fill" style="width:3%"></div></div></div>
+          </div>
+
+          <details style="margin-top:0.75rem">
+            <summary>🎁 혜택별 상세 분석 (클릭하여 펼치기)</summary>
+            <div class="body">
+              <details>
+                <summary>✅ 배달앱 — 550,600원</summary>
+                <div class="body"><strong>조건</strong> 배달의 민족 앱에서 등록 후 사용 가능<br/><strong>매칭</strong> 배달의민족<br/><strong>내 소비</strong> 연 24건, 총 550,600원</div>
+              </details>
+              <details>
+                <summary>✅ 적립 — 122,063원</summary>
+                <div class="body"><strong>조건</strong> 국내외 가맹점 1% 하나머니 적립<br/><strong>매칭</strong> 쏘카, 무신사, 배달의민족 등<br/><strong>내 소비</strong> 연 625건, 총 12,206,218원</div>
+              </details>
+            </div>
+          </details>
+        </div>
+
+        <div>
+          <div class="sec-title"><span class="dot"></span>2~5위 카드</div>
+          <div class="card-item">
+            <span class="rank">🥈</span>
+            <div class="info"><div class="title">KB국민카드 — KB국민 My WE:SH 카드</div><div class="fee">연회비 15,000원 · 총할인 479,180원</div></div>
+            <div class="saving"><div class="val">464,180원</div><div class="lbl">순 절감/년</div></div>
+          </div>
+          <div class="card-item">
+            <span class="rank">🥉</span>
+            <div class="info"><div class="title">NH농협카드 — 클래시 트래블카드</div><div class="fee">연회비 120,000원 · 총할인 535,560원</div></div>
+            <div class="saving"><div class="val">415,560원</div><div class="lbl">순 절감/년</div></div>
+          </div>
+          <div class="card-item">
+            <span class="rank">4️⃣</span>
+            <div class="info"><div class="title">신한카드 — 신한카드 RPM+ Platinum#</div><div class="fee">연회비 32,000원 · 총할인 369,760원</div></div>
+            <div class="saving"><div class="val">337,760원</div><div class="lbl">순 절감/년</div></div>
+          </div>
+          <div class="card-item">
+            <span class="rank">5️⃣</span>
+            <div class="info"><div class="title">우리카드 — 카드의정석 SHOPPING+</div><div class="fee">연회비 10,000원 · 총할인 259,620원</div></div>
+            <div class="saving"><div class="val">249,620원</div><div class="lbl">순 절감/년</div></div>
+          </div>
+
+          <div class="panel-box" style="margin-top:1rem">
+            <h4>Top 5 순 절감액 비교</h4>
+            <div class="compare"><span class="label">🥇 JADE Classic</span><div class="track"><div class="fill" style="width:100%;background:#d4a853"></div></div><span class="val">709,795원</span></div>
+            <div class="compare"><span class="label">🥈 My WE:SH</span><div class="track"><div class="fill" style="width:65%;background:#b8c4ce"></div></div><span class="val">464,180원</span></div>
+            <div class="compare"><span class="label">🥉 클래시 트래블</span><div class="track"><div class="fill" style="width:59%;background:#cd7f32"></div></div><span class="val">415,560원</span></div>
+            <div class="compare"><span class="label">4️⃣ RPM+ Platinum</span><div class="track"><div class="fill" style="width:48%;background:#8a9bae"></div></div><span class="val">337,760원</span></div>
+            <div class="compare"><span class="label">5️⃣ SHOPPING+</span><div class="track"><div class="fill" style="width:35%;background:#6e7a6e"></div></div><span class="val">249,620원</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel: 상세 비교 -->
+    <section class="panel" id="detail">
+      <div class="panel-box" style="margin-bottom:1rem">
+        <h4>Top 5 순 절감액 비교</h4>
+        <div class="compare"><span class="label">🥇 JADE Classic</span><div class="track"><div class="fill" style="width:100%;background:#d4a853"></div></div><span class="val">709,795원</span></div>
+        <div class="compare"><span class="label">🥈 My WE:SH</span><div class="track"><div class="fill" style="width:65%;background:#b8c4ce"></div></div><span class="val">464,180원</span></div>
+        <div class="compare"><span class="label">🥉 클래시 트래블</span><div class="track"><div class="fill" style="width:59%;background:#cd7f32"></div></div><span class="val">415,560원</span></div>
+        <div class="compare"><span class="label">4️⃣ RPM+ Platinum</span><div class="track"><div class="fill" style="width:48%;background:#8a9bae"></div></div><span class="val">337,760원</span></div>
+        <div class="compare"><span class="label">5️⃣ SHOPPING+</span><div class="track"><div class="fill" style="width:35%;background:#6e7a6e"></div></div><span class="val">249,620원</span></div>
+      </div>
+
+      <div class="panel-box">
+        <h4>Top 5 카드 절감액 요약</h4>
+        <table>
+          <thead>
+            <tr><th>순위</th><th>카드사</th><th>카드명</th><th class="num">총할인(원)</th><th class="num">연회비(원)</th><th class="num">순절감(원)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>하나카드</td><td>JADE Classic</td><td class="num">824,795</td><td class="num">115,000</td><td class="num" style="color:var(--green);font-weight:600">709,795</td></tr>
+            <tr><td>2</td><td>KB국민카드</td><td>KB국민 My WE:SH 카드</td><td class="num">479,180</td><td class="num">15,000</td><td class="num" style="color:var(--green);font-weight:600">464,180</td></tr>
+            <tr><td>3</td><td>NH농협카드</td><td>클래시 트래블카드</td><td class="num">535,560</td><td class="num">120,000</td><td class="num" style="color:var(--green);font-weight:600">415,560</td></tr>
+            <tr><td>4</td><td>신한카드</td><td>신한카드 RPM+ Platinum#</td><td class="num">369,760</td><td class="num">32,000</td><td class="num" style="color:var(--green);font-weight:600">337,760</td></tr>
+            <tr><td>5</td><td>우리카드</td><td>카드의정석 SHOPPING+</td><td class="num">259,620</td><td class="num">10,000</td><td class="num" style="color:var(--green);font-weight:600">249,620</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
