@@ -1,0 +1,12 @@
+#!/bin/sh
+# Strip Cursor co-author lines from commit messages created by the agent.
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+if [ "$COMMIT_SOURCE" = "message" ] || [ "$COMMIT_SOURCE" = "template" ]; then
+  exit 0
+fi
+
+if [ -f "$COMMIT_MSG_FILE" ]; then
+  grep -v "Co-authored-by: Cursor" "$COMMIT_MSG_FILE" > "${COMMIT_MSG_FILE}.tmp" && mv "${COMMIT_MSG_FILE}.tmp" "$COMMIT_MSG_FILE"
+fi
