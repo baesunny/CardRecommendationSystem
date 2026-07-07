@@ -1,6 +1,6 @@
 """
-Streamlit UI (v2)
-v2 변경점:
+Streamlit UI (v1)
+v1 설계:
   - 절감액·순위는 calculator.py가 결정론적으로 계산 (LLM 산수 오류 차단)
   - LLM은 자연어 설명(reason / key_benefits / overall_summary)만 담당
 
@@ -404,7 +404,7 @@ if uploaded:
         if not resolve_api_key():
             st.error(
                 "OpenAI API 키가 설정되지 않았다. "
-                "저장소 루트 또는 v2/.env 파일에 OPENAI_API_KEY=your-api-key-here 를 설정해야 한다."
+                "저장소 루트 또는 v1/.env 파일에 OPENAI_API_KEY=your-api-key-here 를 설정해야 한다."
             )
             st.stop()
 
@@ -608,7 +608,7 @@ if uploaded:
                 hide_index=True,
             )
 
-        # ── 파싱 결과 (v2 디버깅용) ─────────────────────────────
+        # ── 파싱 결과 (v1 디버깅용) ─────────────────────────────
         with st.expander("🧪 파서 결과 보기 (raw_benefits → 카테고리:할인율 변환)"):
             st.caption(
                 "benefit_parser가 추출한 카테고리-할인율 매핑 "

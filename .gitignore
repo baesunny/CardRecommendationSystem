@@ -1,11 +1,11 @@
 # 환경 변수 (API 키 등)
 .env
+v1/.env
+v1/gpt/.env
 v2/.env
-v2/gpt/.env
-v3/.env
 
 # 런타임 캐시
-v2/gpt/.parser_cache.json
+v1/gpt/.parser_cache.json
 __pycache__/
 *.py[cod]
 *$py.class
@@ -13,8 +13,8 @@ __pycache__/
 
 # Streamlit
 .streamlit/secrets.toml
-v2/.streamlit/secrets.toml
-v2/gpt/.streamlit/secrets.toml
+v1/.streamlit/secrets.toml
+v1/gpt/.streamlit/secrets.toml
 
 # OS / IDE
 .DS_Store

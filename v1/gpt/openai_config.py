@@ -81,7 +81,7 @@ def require_api_key() -> str:
     if not key:
         raise ValueError(
             "OpenAI API 키가 설정되지 않았다.\n"
-            "저장소 루트 또는 v2/.env 파일에 OPENAI_API_KEY=your-api-key-here 를 설정해야 한다."
+            "저장소 루트 또는 v1/.env 파일에 OPENAI_API_KEY=your-api-key-here 를 설정해야 한다."
         )
     return key
 

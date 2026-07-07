@@ -720,7 +720,7 @@ def render_demo(recs: list[dict], top5: list[dict], tx: list[dict]) -> None:
     <div class="demo-hero">
         <h1>💳 AI 맞춤 신용카드 추천</h1>
         <p>12개월 소비 데이터 기반 최적 카드 시뮬레이션 · UI 개선 예시 화면</p>
-        <span class="demo-badge">✨ UI DEMO v2 — 기존 대비 레이아웃·차트·카드 비주얼 개선</span>
+        <span class="demo-badge">✨ UI DEMO — 기존 대비 레이아웃·차트·카드 비주얼 개선</span>
     </div>
     """, unsafe_allow_html=True)
 
