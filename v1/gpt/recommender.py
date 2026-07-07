@@ -2,8 +2,8 @@
 GPT 카드 추천 모듈 (Stage 3, LLM API 호출)
 
 이전 버전과의 차이:
-  v1: GPT 한 번 호출로 파싱·계산·설명을 다 시킴 → 산수 오류 잦음
-  v2: 역할을 3단계로 분리.
+  초기 방식: GPT 한 번 호출로 파싱·계산·설명을 다 시킴 → 산수 오류 잦음
+  v1: 역할을 3단계로 분리.
       [LLM #1] parser     : raw_benefits 자연어 → {카테고리: 할인율} 구조화
       [Python] calculator : 결정론적 절감액·순위 계산 (산수 오류 0)
       [LLM #2] recommender: 계산 결과 → 자연어 설명 (reason/key_benefits/summary)
@@ -195,7 +195,7 @@ def run(
     gpt_model: str = "gpt-4o-mini",
 ) -> dict:
     """
-    카드 거래 내역 → 최종 추천 결과 (v2 파이프라인)
+    카드 거래 내역 → 최종 추천 결과 (v1 파이프라인)
 
     Returns:
         {

@@ -6,60 +6,34 @@
 
 | 버전 | 폴더 | 접근 방식 | 실행 |
 |------|------|-----------|------|
-| **v2.1** | [`v2/`](v2/) | RAG + LLM 하이브리드, **카테고리** 기반 매칭 | `streamlit run v2/gpt/app.py` |
-| **v3** | [`v3/`](v3/) | 가맹점 **퍼지매칭** + LLM 검산, 전체 100종 시뮬레이션 | `streamlit run v3/app.py` |
+| **v1** | [`v1/`](v1/) | RAG + LLM 하이브리드, **카테고리** 기반 매칭 | `streamlit run v1/gpt/app.py` |
+| **v2** | [`v2/`](v2/) | 가맹점 **퍼지매칭** + LLM 검산, 전체 100종 시뮬레이션 | `streamlit run v2/app.py` |
 
-> v2.1은 Python 룰과 결정론적 계산이 추천의 중심이고 LLM은 보조 역할인 반면, v3는 GPT가 매칭·시뮬레이션·추천을 주도하고 Python은 결과를 검산하는 **전면 재설계**이며, 두 버전 모두 독립적으로 실행할 수 있습니다.
+> v1은 Python 기반의 규칙과 결정론적 계산을 중심으로 추천을 수행하고, LLM은 이를 보조합니다. 반면 v2는 GPT가 가맹점 매칭, 혜택 시뮬레이션, 카드 추천까지 전 과정을 주도하고, Python은 결과를 검증하는 역할을 수행하도록 구조를 전면 개편했습니다.
 
-📄 **발표자료**: [소비패턴기반_AI_카드추천시스템_발표자료.pdf](소비패턴기반_AI_카드추천시스템_발표자료.pdf) — 프로젝트 개요, 파이프라인, 시연 결과를 정리한 PDF이며, 이는 v3의 내용을 기반으로 제작되었습니다.
+📄 **발표자료**: [소비패턴기반_AI_카드추천시스템_발표자료.pdf](소비패턴기반_AI_카드추천시스템_발표자료.pdf) — 프로젝트 개요, 파이프라인, 시연 결과를 정리한 PDF이며, 이는 v2의 내용을 기반으로 제작되었습니다.
 
 ---
 
 ## 버전별 요약
 
-### v2.1 — RAG + LLM (카테고리 기반)
+### v1 — RAG + LLM (카테고리 기반)
 
 - CSV에 **카테고리 컬럼**이 포함된 6컬럼 형식
 - 소비 비율 가중 **RAG 키워드 매칭**으로 Top-15 후보 선별
 - 100종 카드 혜택 **사전 파싱 JSON** → 추천 시 즉시 조회
 - 절감액·순위는 **Python 결정론적 계산**, LLM은 설명만 담당
 
-자세한 내용: **[v2/README.md](v2/README.md)**
+자세한 내용: **[v1/README.md](v1/README.md)**
 
-### v3 — 가맹점 매칭 (전면 재설계)
+### v2 — 가맹점 매칭 (전면 재설계)
 
 - CSV **3컬럼** (date, merchant_name, amount) — 영수증 가맹점명 그대로 업로드
 - GPT **퍼지매칭**으로 가맹점명 정규화 → 카드별 혜택 매핑
 - 100종 전체 **절감액 시뮬레이션** (LLM + Python 검산)
 - Top 5 선정 후 GPT가 추천 설명 생성
 
-자세한 내용: **[v3/README.md](v3/README.md)**
-
----
-
-## 공통 설치
-
-Python 3.10+ 권장. OpenAI API 키가 필요합니다.
-
-```bash
-# 1. 저장소 클론 후 루트에서 API 키 설정
-copy .env.example .env          # Windows
-# cp .env.example .env          # macOS / Linux
-
-# .env 파일 편집
-# OPENAI_API_KEY=your-api-key-here
-
-# 2-A. v2 실행
-cd v2
-pip install -r requirements.txt
-streamlit run gpt/app.py
-
-# 2-B. v3 실행
-cd v3
-pip install -r requirements.txt
-streamlit run app.py
-```
-
+자세한 내용: **[v2/README.md](v2/README.md)**
 
 ---
 
@@ -72,7 +46,7 @@ CardRecommendationSystem/
 ├── .env.example           ← API 키 템플릿
 ├── .gitignore
 │
-├── v2/                    ← v2.1 RAG + LLM 버전
+├── v1/                    ← v1 RAG + LLM 버전
 │   ├── gpt/               # Streamlit UI + 파이프라인
 │   ├── rag/               # 소비 분석 + 후보 검색
 │   ├── scripts/           # 혜택 사전 파싱
@@ -80,7 +54,7 @@ CardRecommendationSystem/
 │   ├── examples/          # 샘플 거래내역 (1,326건)
 │   └── README.md
 │
-└── v3/                    ← v3 가맹점 매칭 버전
+└── v2/                    ← v2 가맹점 매칭 버전
     ├── app.py             # Streamlit UI + 5단계 파이프라인
     ├── output/            # 카드 DB + 가맹점 목록
     ├── examples/          # 샘플 거래내역
